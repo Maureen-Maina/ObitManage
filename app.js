@@ -102,7 +102,9 @@ const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const path = parsedUrl.pathname;
 
-    if (path === '/submit_obituary' && req.method === 'POST') {
+    if (path === '/') {
+        serveFile('./views/index.html', 'text/html', res);
+    } else if (path === '/submit_obituary' && req.method === 'POST') {
         handleFormSubmission(req, res);
     } else if (path === '/submit_obituary' && req.method === 'GET') {
         serveFile('./views/obituary_form.html', 'text/html', res);
@@ -121,3 +123,4 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+                                 
